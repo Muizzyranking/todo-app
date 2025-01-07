@@ -53,46 +53,54 @@ function Todo() {
     }
   }
 
+  function taskList() {
+    if (todos.length === 0) {
+      return <p>No tasks to show</p>;
+    } else {
+      return (
+        <ol>
+          {todos.map((todo, index) => (
+            <li key={index}>
+              <div className="entry-title">
+                <h1>{todo.title}</h1>
+                <div className="btns">
+                  <button
+                    className="delete-btn btn"
+                    onClick={() => deleteTask(index)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="btn move-btn"
+                    onClick={() => moveUp(index)}
+                  >
+                    Move up
+                  </button>
+                  <button
+                    className="btn move-btn"
+                    onClick={() => moveDown(index)}
+                  >
+                    Move Down
+                  </button>
+                </div>
+              </div>
+              <div className="entry-body">
+                <p>{todo.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      );
+    }
+  }
+
   return (
     <div className="todo">
       <h1 className="todo-title">TODO APP</h1>
       <div className="todo-body">
         <div className="tasks">
           <h1>Tasks</h1>
-          <div className="task-list">
-            <ol>
-              {todos.map((todo, index) => (
-                <li key={index}>
-                  <div className="entry-title">
-                    <h1>{todo.title}</h1>
-                    <div className="btns">
-                      <button
-                        className="delete-btn btn"
-                        onClick={() => deleteTask(index)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="btn move-btn"
-                        onClick={() => moveUp(index)}
-                      >
-                        Move up
-                      </button>
-                      <button
-                        className="btn move-btn"
-                        onClick={() => moveDown(index)}
-                      >
-                        Move Down
-                      </button>
-                    </div>
-                  </div>
-                  <div className="entry-body">
-                    <p>{todo.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <div className="task-list">{taskList()}</div>
         </div>
       </div>
       <div className="input">
